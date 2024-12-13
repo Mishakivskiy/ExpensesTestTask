@@ -1,0 +1,99 @@
+Expense API Documentation
+
+This project provides an API for managing expenses. It includes functionality for creating, retrieving, updating, and deleting expenses, as well as calculating summaries based on categories and filtering expenses by date range.
+Base URL
+
+The base URL for the API is:
+
+/api/
+
+Endpoints
+1. Expenses
+
+    GET /api/expenses/
+    This endpoint retrieves a list of all expenses for the current user.
+    Response: A list of expenses, each containing the title, amount, date, and category.
+
+    POST /api/expenses/
+    This endpoint allows the creation of a new expense.
+    Request Body:
+
+{
+  "title": "Taxi",
+  "amount": 20.00,
+  "date": "2024-12-14",
+  "category": "Transport"
+}
+
+Response: The newly created expense object with its id.
+
+GET /api/expenses/{id}/
+This endpoint retrieves details of a specific expense.
+Parameters:
+id - The ID of the expense.
+Response: The expense object with details.
+
+PUT /api/expenses/{id}/
+This endpoint allows updating an existing expense.
+Parameters:
+id - The ID of the expense to update.
+Request Body:
+
+    {
+      "title": "Taxi Updated",
+      "amount": 25.00,
+      "date": "2024-12-14",
+      "category": "Transport"
+    }
+
+    Response: The updated expense object.
+
+    DELETE /api/expenses/{id}/
+    This endpoint deletes a specific expense.
+    Parameters:
+    id - The ID of the expense to delete.
+    Response: 204 No Content (no response body).
+
+2. User
+
+    GET /api/users/
+    This endpoint retrieves a list of all users (useful for admin).
+    Response: A list of users with their id, username, and email.
+
+    POST /api/users/
+    This endpoint allows the creation of a new user (for admin use).
+    Request Body:
+
+    {
+      "username": "new_user",
+      "email": "newuser@example.com"
+    }
+
+    Response: The newly created user object.
+
+3. Expenses by Date Range
+
+    GET /api/expenses/date-range/
+    This endpoint filters expenses within a specific date range.
+    Query Parameters:
+    start_date - The start date of the range (format YYYY-MM-DD).
+    end_date - The end date of the range (format YYYY-MM-DD).
+    Response: A list of expenses that fall within the specified date range.
+
+4. Category Summary
+
+    GET /api/expenses/category-summary/
+    This endpoint returns the total expenses per category for the current month.
+    Response: A summary of expenses categorized by type, with the total amount for each category.
+    Example Response:
+
+    {
+      "Food": 100.00,
+      "Transport": 50.00,
+      "Travel": 200.00
+    }
+
+
+    All expenses must have a positive amount.
+    The date field must be provided in the YYYY-MM-DD format.
+    This API does not include authentication or authorization for simplicity. In a real-world scenario, it would be necessary to protect these endpoints.
